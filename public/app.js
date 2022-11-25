@@ -37,12 +37,12 @@ window.onload = function () {
       if (data.length > 0) {
         updateHistory(data);
       } else {
-        historyElm.innerHTML = "There is No History ❗";
+        historyElm.innerHTML = "There is No History";
       }
     })
-    .catch((error) => {
-      console.log(error);
-      alert("Error Occurred 💥");
+    .catch((e) => {
+      console.log(e);
+      alert("Error Occurred");
     });
 
   cityInput.addEventListener("keypress", function (e) {
