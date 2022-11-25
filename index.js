@@ -8,6 +8,11 @@ app.use(cors());
 
 app.use(express.static("public"));
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/api/history", require("./api/route"));
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log("App is Running on PORT" + " " + PORT);
