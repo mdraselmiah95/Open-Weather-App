@@ -10,3 +10,5 @@ const humidity = document.getElementById("humidity");
 const cityInput = document.getElementById("city-input");
 const historyElm = document.getElementById("history");
 const masterHistory = document.getElementById("master-history");
+
+console.log(mainText);
