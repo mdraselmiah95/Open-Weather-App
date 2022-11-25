@@ -27,9 +27,22 @@ window.onload = function () {
       getWeatherData(null, success.coords);
     },
     (error) => {
-      getWeatherData(DEFAULT_CITY);
+      getWeatherData();
     }
   );
+  cityInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      if (e.target.value) {
+        getWeatherData(e.target.value);
+        cityInput.value = "";
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "Please Enter a Valid City Name 💥",
+      });
+    }
+  });
 };
 
 function getWeatherData(city = DEFAULT_CITY, coords) {
