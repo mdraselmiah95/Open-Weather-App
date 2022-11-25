@@ -36,11 +36,7 @@ window.onload = function () {
         getWeatherData(e.target.value);
         cityInput.value = "";
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Sorry...",
-          text: "Please Enter a Valid City Name 💥",
-        });
+        console.log("Please Enter a Valid City Name 💥");
       }
     }
   });
@@ -55,13 +51,14 @@ function getWeatherData(city = DEFAULT_CITY, coords) {
   axios
     .get(url)
     .then(({ data }) => {
+      const temperature = Math.round(data.main.temp) - 273;
       let weather = {
         icon: data.weather[0].icon,
         name: data.name,
         country: data.sys.country,
         main: data.weather[0].main,
         description: data.weather[0].description,
-        temp: data.main.temp,
+        temp: temperature,
         pressure: data.main.pressure,
         humidity: data.main.humidity,
       };
