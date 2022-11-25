@@ -59,7 +59,7 @@ window.onload = function () {
             });
         });
       } else {
-        alert("Please Enter a Valid City Name");
+        console.log("Please Enter Valid City Name 🏙️");
       }
     }
   });
@@ -91,7 +91,11 @@ function getWeatherData(city = DEFAULT_CITY, coords, cb) {
     })
     .catch((e) => {
       console.log(e);
-      alert("City Not Found");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "City Not Found 🏙️",
+      });
     });
 }
 
