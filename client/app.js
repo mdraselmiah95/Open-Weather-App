@@ -35,12 +35,13 @@ window.onload = function () {
       if (e.target.value) {
         getWeatherData(e.target.value);
         cityInput.value = "";
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "Please Enter a Valid City Name 💥",
+        });
       }
-    } else {
-      Swal.fire({
-        icon: "error",
-        text: "Please Enter a Valid City Name 💥",
-      });
     }
   });
 };
