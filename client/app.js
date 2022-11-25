@@ -51,8 +51,14 @@ function getWeatherData(city = DEFAULT_CITY, coords) {
         pressure: data.main.pressure,
         humidity: data.main.humidity,
       };
+      console.log(weather);
     })
     .catch((error) => {
       console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Sorry...",
+        text: "City Not Found 💥",
+      });
     });
 }
