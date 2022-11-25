@@ -23,13 +23,11 @@ const DEFAULT_CITY = "dhaka,bd";
 
 window.onload = function () {
   navigator.geolocation.getCurrentPosition(
-    (success) => {
-      getWeatherData(null, success.coords);
-      console.log(success);
+    (s) => {
+      getWeatherData(null, s.coords);
     },
     (error) => {
       getWeatherData(DEFAULT_CITY);
-      console.log(error);
     }
   );
 };
@@ -37,8 +35,13 @@ window.onload = function () {
 function getWeatherData(city = DEFAULT_CITY, coords) {
   let url = BASE_URL;
   city === null
-    ? (url = `${url}&lat=${coords.latitude}&=${coords.longitude}`)
+    ? (url = `${url}&lat=${coords.latitude}&lon=${coords.longitude}`)
     : (url = `${url}&q=${city}`);
 
-  console.log(url);
+  axios
+    .get(url)
+    .then((response) => console.log(response.data))
+    .catch((error) => {
+      console.log(error);
+    });
 }
