@@ -4,12 +4,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send(" <h1> Server is Running.</h1>");
-});
+app.use(express.static("public"));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log("App is Running on PORT" + PORT);
+  console.log("App is Running on PORT" + " " + PORT);
 });
