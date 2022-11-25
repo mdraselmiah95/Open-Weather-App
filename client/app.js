@@ -13,7 +13,25 @@ const masterHistory = document.getElementById("master-history");
 
 // Important KEYS and URL 🥈
 
-const API_KEY = "2e0250d8cfbef9afab0dbc870f7c5385";
+const API_KEY = "00648c3df9cb0d2748fb5dbdaa57cfae";
 const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}`;
-const ICON_URL = "https://openweathermap.org/img/w/";
-const DEFAULT_CITY = "Magura,bd";
+const ICON_URL = "http://openweathermap.org/img/wn/";
+const DEFAULT_CITY = "magura,bd";
+
+//https://api.openweathermap.org/data/2.5/weather?id=2172797&appid=00648c3df9cb0d2748fb5dbdaa57cfae
+//http://openweathermap.org/img/wn/10d@2x.png
+
+window.onload = function () {
+  navigator.geolocation.getCurrentPosition(
+    (success) => {
+      getWeatherData(null, success.coords);
+      console.log(success);
+    },
+    (error) => {
+      getWeatherData(DEFAULT_CITY);
+      console.log(error);
+    }
+  );
+};
+
+function getWeatherData(city = DEFAULT_CITY, coords) {}
