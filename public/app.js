@@ -48,8 +48,16 @@ window.onload = function () {
   cityInput.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       if (e.target.value) {
-        getWeatherData(e.target.value);
-        cityInput.value = "";
+        getWeatherData(e.target.value, null, (weather) => {
+          e.target.value = "";
+          axios
+            .post("/api/history", weather)
+            .then(({ data }) => updateHistory(data))
+            .catch((error) => {
+              console.log(error);
+              alert("Error Occurred");
+            });
+        });
       } else {
         console.log("Please Enter a Valid City Name 💥");
       }
@@ -57,7 +65,7 @@ window.onload = function () {
   });
 };
 
-function getWeatherData(city = DEFAULT_CITY, coords) {
+function getWeatherData(city = DEFAULT_CITY, coords, cb) {
   let url = BASE_URL;
   city === null
     ? (url = `${url}&lat=${coords.latitude}&lon=${coords.longitude}`)
@@ -78,6 +86,7 @@ function getWeatherData(city = DEFAULT_CITY, coords) {
         humidity: data.main.humidity,
       };
       setWeather(weather);
+      if (cb) cb(weather);
     })
     .catch((error) => {
       console.log(error);
