@@ -6,10 +6,10 @@ route.get("/", (req, res) => {
     .then((history) => {
       res.status(200).json(history);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((e) => {
+      console.log(e);
       res.status(500).json({
-        message: "Error Occurred 💥",
+        message: "Error Occurred",
       });
     });
 });
@@ -22,10 +22,10 @@ route.post("/", (req, res) => {
     .then((history) => {
       res.status(201).json(history);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((e) => {
+      console.log(e);
       res.status(500).json({
-        message: "Error Occurred 💥",
+        message: "Error Occurred",
       });
     });
 });
