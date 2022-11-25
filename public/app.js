@@ -30,6 +30,20 @@ window.onload = function () {
       getWeatherData();
     }
   );
+
+  axios
+    .get("/api/history")
+    .then(({ data }) => {
+      if (data.length > 0) {
+      } else {
+        historyElm.innerHTML = "There is No History ❗";
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Error Occurred 💥");
+    });
+
   cityInput.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       if (e.target.value) {
