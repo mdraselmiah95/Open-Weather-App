@@ -11,4 +11,9 @@ const cityInput = document.getElementById("city-input");
 const historyElm = document.getElementById("history");
 const masterHistory = document.getElementById("master-history");
 
-console.log(mainText);
+// Important KEYS and URL 🥈
+
+const API_KEY = "2e0250d8cfbef9afab0dbc870f7c5385";
+const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}`;
+const ICON_URL = "https://openweathermap.org/img/w/";
+const DEFAULT_CITY = "Magura,bd";
