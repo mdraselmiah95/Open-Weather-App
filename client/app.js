@@ -51,7 +51,7 @@ function getWeatherData(city = DEFAULT_CITY, coords) {
         pressure: data.main.pressure,
         humidity: data.main.humidity,
       };
-      console.log(weather);
+      setWeather(weather);
     })
     .catch((error) => {
       console.log(error);
@@ -61,4 +61,15 @@ function getWeatherData(city = DEFAULT_CITY, coords) {
         text: "City Not Found 💥",
       });
     });
+}
+
+function setWeather(weather) {
+  condition.src = `${ICON_URL}${weather.icon}.png`;
+  city.innerHTML = weather.name;
+  country.innerHTML = weather.country;
+  mainText.innerHTML = weather.main;
+  description.innerHTML = weather.description;
+  temp.innerHTML = weather.temp;
+  pressure.innerHTML = weather.pressure;
+  humidity.innerHTML = weather.humidity;
 }
