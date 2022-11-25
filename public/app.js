@@ -23,10 +23,10 @@ const DEFAULT_CITY = "khulna,bd";
 
 window.onload = function () {
   navigator.geolocation.getCurrentPosition(
-    (success) => {
-      getWeatherData(null, success.coords);
+    (s) => {
+      getWeatherData(null, s.coords);
     },
-    (error) => {
+    (e) => {
       getWeatherData();
     }
   );
@@ -53,13 +53,13 @@ window.onload = function () {
           axios
             .post("/api/history", weather)
             .then(({ data }) => updateHistory(data))
-            .catch((error) => {
-              console.log(error);
+            .catch((e) => {
+              console.log(e);
               alert("Error Occurred");
             });
         });
       } else {
-        console.log("Please Enter a Valid City Name 💥");
+        alert("Please Enter a Valid City Name");
       }
     }
   });
@@ -67,6 +67,7 @@ window.onload = function () {
 
 function getWeatherData(city = DEFAULT_CITY, coords, cb) {
   let url = BASE_URL;
+
   city === null
     ? (url = `${url}&lat=${coords.latitude}&lon=${coords.longitude}`)
     : (url = `${url}&q=${city}`);
@@ -74,27 +75,23 @@ function getWeatherData(city = DEFAULT_CITY, coords, cb) {
   axios
     .get(url)
     .then(({ data }) => {
-      const temperature = Math.round(data.main.temp) - 273;
       let weather = {
         icon: data.weather[0].icon,
         name: data.name,
         country: data.sys.country,
         main: data.weather[0].main,
         description: data.weather[0].description,
-        temp: temperature,
+        temp: data.main.temp,
         pressure: data.main.pressure,
         humidity: data.main.humidity,
       };
+
       setWeather(weather);
       if (cb) cb(weather);
     })
-    .catch((error) => {
-      console.log(error);
-      Swal.fire({
-        icon: "error",
-        title: "Sorry...",
-        text: "City Not Found 💥",
-      });
+    .catch((e) => {
+      console.log(e);
+      alert("City Not Found");
     });
 }
 
